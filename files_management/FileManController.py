@@ -1,4 +1,4 @@
-from files_management.utils import list_posts, get_post, save_post, del_post
+from files_management.utils import list_posts, get_post, save_post, del_post, exist_post
 # from django.shortcuts import render
 from ninja import Router, Schema
 
@@ -52,11 +52,14 @@ def post_file(request, payload: FileBody):
 @files_controller.put('/posts/{paraTitle}')
 def update_file(request, payload: FileBodyUpdate, paraTitle):
     try:
-        if paraTitle is not None and payload.file_content is not None:
-            save_post(title=paraTitle, content=payload.file_content)
-            return {'Message': 'File Updated Successfully'}
+        if exist_post(paraTitle):
+            if paraTitle is not None and payload.file_content is not None:
+                save_post(title=paraTitle, content=payload.file_content)
+                return {'Message': 'File Updated Successfully'}
+            else:
+                return {'Message': 'Please provide file name and file content to update'}
         else:
-            return {'Message': 'Please provide file name and file content to update'}
+            return {'Message': 'There is no file with that name'}
     except:
         return {'Message': 'There is an error occurs'}
 
@@ -65,9 +68,9 @@ def update_file(request, payload: FileBodyUpdate, paraTitle):
 def delete_file(request, paraTitle):
     try:
         if paraTitle is not None:
-            del_post(paraTitle)
-            return {'Message': 'File deleted Successfully'}
-        else:
-            return {'Message': 'Please provide file name and file content to delete'}
+            if del_post(paraTitle):
+                return {'Message': 'File deleted Successfully'}
+            else:
+                return {'Message': 'There is no file with that name, Please provide a correct file name to delete it'}
     except:
         return {'Message': 'There is an error occurs'}

@@ -38,9 +38,21 @@ def get_post(title):
 
 
 def del_post(title):
+    """
+    delete file if exists
+    """
     filename = f"posts/{title}.md"
     if default_storage.exists(filename):
         default_storage.delete(filename)
     else:
-        return {'Message': 'there is no file with that name'}
+        return False
     return {'Message': 'File deleted Successfully'}
+
+
+def exist_post(title):
+    """Check if file exists"""
+    filename = f"posts/{title}.md"
+    if default_storage.exists(filename):
+        return True
+    else:
+        return False
