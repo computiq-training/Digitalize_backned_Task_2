@@ -64,7 +64,7 @@ def update_file(request, payload: FileBodyUpdate, paraTitle):
         return {'Message': 'There is an error occurs'}
 
 
-@files_controller.delete('/posts{paraTitle}')
+@files_controller.delete('/posts/{paraTitle}')
 def delete_file(request, paraTitle):
     try:
         if paraTitle is not None:
