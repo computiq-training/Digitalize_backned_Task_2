@@ -1,1 +1,1 @@
-This is the content of post 2
+This is a content of post 2
