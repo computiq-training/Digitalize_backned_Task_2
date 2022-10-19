@@ -6,7 +6,7 @@ from files_management.controller import post_controller
 
 
 api = NinjaAPI()
-api.add_router('/' , post_controller)
+api.add_router('/posts' , post_controller)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
