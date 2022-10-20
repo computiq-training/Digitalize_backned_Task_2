@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from ninja import NinjaAPI
+# call the router
+from files_management.controller import posts_cont
+
+api=NinjaAPI()
+api.add_router('/posts',posts_cont)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/',api.urls)
 ]

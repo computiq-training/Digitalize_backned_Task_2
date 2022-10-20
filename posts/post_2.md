@@ -1,1 +1,1 @@
-This is the content of post 2
+Post 2 new content
