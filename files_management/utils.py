@@ -23,6 +23,7 @@ def save_post(title, content):
     if default_storage.exists(filename):
         default_storage.delete(filename)
     default_storage.save(filename, ContentFile(content))
+    return{'Message':f'Post {title} Created Successfully'}
 
 
 def get_post(title):
@@ -37,5 +38,17 @@ def get_post(title):
         return None
 
 
+
+
+
 def del_post(title):
-    pass
+  
+    filename = f"posts/{title}.md"
+    if default_storage.exists(filename):
+        default_storage.delete(filename)
+    else:
+        return {'Message':'The post cannot be deleted because it does not exist'}
+    return {'Message':f'Post {title} deleted Successfully'}
+
+
+    
