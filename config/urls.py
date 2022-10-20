@@ -20,7 +20,7 @@ from ninja import NinjaAPI
 from files_management.controller import postController
 
 api = NinjaAPI()
-api.add_router('/posts',postController)
+api.add_router('/posts', postController)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
