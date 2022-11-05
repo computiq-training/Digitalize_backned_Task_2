@@ -13,6 +13,7 @@ def list_posts():
                        for filename in filenames if filename.endswith(".md")))
 
 
+
 def save_post(title, content):
     """
     Saves a blog post, given its title and Markdown
@@ -23,6 +24,7 @@ def save_post(title, content):
     if default_storage.exists(filename):
         default_storage.delete(filename)
     default_storage.save(filename, ContentFile(content))
+    return{'Message':f'Post {title} Created Successfully'}
 
 
 def get_post(title):
@@ -38,4 +40,9 @@ def get_post(title):
 
 
 def del_post(title):
-    pass
+    filename = f"posts/{title}.md"
+    if default_storage.exists(filename):
+        default_storage.delete(filename)
+    else:
+        return {'Message':'this post doesnt exist'}
+    return {'Message':f'Post {title} deleted Successfully'}
